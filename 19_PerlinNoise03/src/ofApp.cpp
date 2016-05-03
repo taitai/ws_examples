@@ -5,7 +5,7 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetBackgroundAuto(false);
     ofBackground(0);
-    noiseScale = ofRandom(0.005, 0.02);
+    noiseScale = ofRandom(0.01);
     particleNum = 10000;
     particles = new Particles(particleNum);
     particles->friction = 0.01;
@@ -69,7 +69,10 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    noiseScale = ofRandom(0.01, 0.02);
+    noiseScale = ofRandom(0.01);
+    for (int i = 0; i < particleNum; i++) {
+        particles->positions[i] = ofVec3f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
+    }
 }
 
 //--------------------------------------------------------------
