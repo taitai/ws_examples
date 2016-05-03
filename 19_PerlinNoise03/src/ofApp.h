@@ -21,11 +21,7 @@ public:
     void gotMessage(ofMessage msg);
     
     int width, height;
-	
-    ofImage myImage;
-	unsigned char * pixels;
-
+    float noiseScale;
     int particleNum;
     Particles *particles;
-    //ofVboMesh mesh;
 };

@@ -3,44 +3,26 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(60);
+    ofSetBackgroundAuto(false);
     ofBackground(0);
-
-    width = ofGetWidth();
-    height = ofGetHeight();
-
-    myImage.allocate(width, height, OF_IMAGE_GRAYSCALE);
-    pixels = myImage.getPixels();
-
-    float scaleX = ofRandom(3.0, 10.0);
-    float scaleY = ofRandom(3.0, 10.0);
-    for (int j = 0; j < height; j++) {
-        for (int i = 0; i < width; i++) {
-            float noiseX = ofMap(i, 0, width, 0, scaleX);
-            float noiseY = ofMap(j, 0, width, 0, scaleY);
-            int noiseVal = ofNoise(noiseX, noiseY) * 255;
-            pixels[j * width + i] = noiseVal;
-        }
-    }
-    myImage.update();
-
-    particleNum = 40000;
+    noiseScale = ofRandom(0.005, 0.02);
+    particleNum = 10000;
     particles = new Particles(particleNum);
-    particles->friction = 0.015;
+    particles->friction = 0.01;
 
     for (int i = 0; i < particleNum; i++) {
-        ofVec3f position = ofVec3f(ofRandom(width), ofRandom(height));
+        ofVec3f position = ofVec3f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
         particles->addParticle(position);
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-    float speed = 0.1;
+    float speed = 0.02;
     particles->resetForce();
     for (int i = 0; i < particleNum; i++) {
-        int val = pixels[int(particles->positions[i].y) * width + int(particles->positions[i].x)];
-        int angle = ofMap(val, 0, 255, 0, PI*2.0);
+        float val = ofNoise(particles->positions[i].x * noiseScale, particles->positions[i].y * noiseScale);
+        int angle = ofMap(val, 0, 1, 0, TWO_PI);
         ofVec3f force;
         force.x = cos(angle) * speed;
         force.y = sin(angle) * speed;
@@ -53,9 +35,9 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(127);
-    myImage.draw(0, 0);
-
+    ofSetColor(0, 15);
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    
     ofSetColor(255);
     particles->draw();
 }
@@ -87,7 +69,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    noiseScale = ofRandom(0.01, 0.02);
 }
 
 //--------------------------------------------------------------
