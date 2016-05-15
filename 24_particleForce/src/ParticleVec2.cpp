@@ -16,7 +16,7 @@ void ParticleVec2::update(){
 }
 
 void ParticleVec2::draw(){
-    ofCircle(position.x, position.y, radius);
+    ofDrawCircle(position.x, position.y, radius);
 }
 
 void ParticleVec2::addForce(ofVec2f force){

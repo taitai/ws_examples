@@ -21,7 +21,7 @@ public:
     void gotMessage(ofMessage msg);
     
     static const int NUM = 5000;
-    ParticleVec2 particle[NUM];
+    ParticleVec2 particle;
 };
 
 

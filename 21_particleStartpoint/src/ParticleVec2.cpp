@@ -17,40 +17,9 @@ void ParticleVec2::update(){
 }
 
 void ParticleVec2::draw(){
-    ofCircle(position.x, position.y, radius);
+    ofDrawCircle(position.x, position.y, radius);
 }
 
 void ParticleVec2::addForce(ofVec2f force){
     acceleration += force / mass;
 }
-
-void ParticleVec2::bounceOffWalls(){
-    if (position.x < 0) {
-        velocity.x *= -1;
-        position.x = 0;
-    }
-    if (position.x > ofGetWidth()) {
-        velocity.x *= -1;
-        position.x = ofGetWidth();
-    }
-    if (position.y < 0) {
-        velocity.y *= -1;
-        position.y = 0;
-    }
-    if (position.y > ofGetHeight()) {
-        velocity.y *= -1;
-        position.y = ofGetHeight();
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-

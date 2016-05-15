@@ -14,5 +14,5 @@ void ParticleVec2::update(){
 }
 
 void ParticleVec2::draw(){
-    ofCircle(position.x, position.y, radius); // 円を描画
+    ofDrawCircle(position.x, position.y, radius); // 円を描画
 }

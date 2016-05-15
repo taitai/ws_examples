@@ -23,7 +23,7 @@ void ParticleVec3::update(){
 }
 
 void ParticleVec3::draw(){
-    ofCircle(position.x, position.y, radius);
+    ofDrawCircle(position, radius);
 }
 
 void ParticleVec3::addForce(ofVec3f _force){
